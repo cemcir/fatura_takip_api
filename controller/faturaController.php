@@ -38,6 +38,9 @@ class faturaController
         else if($fatura['tutar']<0) {
             return ['status'=>400,'msg'=>'tutar 0 dan küçük olamaz'];
         }
+        if (!is_numeric($fatura['tutar'])) {
+            return ['status' => 400, 'msg' => 'tutar geçerli bir sayı olmalıdır'];
+        }
         else if($this->faturaModel->Getir($fatura['fatura_no'])){
             return ['status'=>400,'msg'=>'fatura no zaten kayıtlı'];
         }
