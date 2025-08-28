@@ -43,9 +43,8 @@ try {
     }
     else if ($method === 'POST' && isset($segments[0], $segments[1]) && $segments[0] === 'faturalar' && $segments[1] === 'sil') {
         $input = json_decode(file_get_contents('php://input'), true);
-        if (!isset($input['faturaId'])) throw new Exception("faturaId alanı eksik");
 
-        $sonuc = $controller->Sil($input['faturaId']);
+        $sonuc = $controller->Sil($input);
         echo json_encode($sonuc,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
     }

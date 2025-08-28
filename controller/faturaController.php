@@ -53,11 +53,17 @@ class faturaController
         }
     }
 
-    public function Sil($faturaId)
+    public function Sil($fatura)
     {
+        if(!isset($fatura['faturaId']) && empty($fatura['faturaId'])) {
+            return ['status' => 400, 'msg' => 'faturaId zorunludur'];
+        }
+        else if (!is_numeric($fatura['faturaId'])) {
+            return ['status' => 400, 'msg' => 'faturaId tam sayı olmalıdır'];
+        }
         try {
-            if($this->faturaModel->FaturaBul($faturaId)) {
-                $this->faturaModel->Sil($faturaId);
+            if($this->faturaModel->FaturaBul($fatura['faturaId'])) {
+                $this->faturaModel->Sil($fatura['faturaId']);
                 return ['status' => 204, 'msg' => 'Fatura silindi'];
             }
             return ['status'=>404,'mag'=>'Fatura Kaydı Bulunamadı'];
