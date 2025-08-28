@@ -27,19 +27,19 @@ $path = trim($path, '/');
 $segments = explode('/', $path);
 
 try {
-    // GET /fatura/listele
+    // GET /faturalar/listele
     if ($method === 'GET' && isset($segments[0], $segments[1]) && $segments[0] === 'faturalar' && $segments[1] === 'listele') {
         $sonuc = $controller->Listele();
         echo json_encode($sonuc,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
-    // POST /fatura/ekle
+    // POST /faturalar/ekle
     else if ($method === 'POST' && isset($segments[0], $segments[1]) && $segments[0] === 'faturalar' && $segments[1] === 'ekle') {
         $input = json_decode(file_get_contents('php://input'), true);
 
         $sonuc= $controller->Ekle($input);
         echo json_encode($sonuc,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
-        // POST /fatura/sil
+        // POST /faturalar/sil
     }
     else if ($method === 'POST' && isset($segments[0], $segments[1]) && $segments[0] === 'faturalar' && $segments[1] === 'sil') {
         $input = json_decode(file_get_contents('php://input'), true);
