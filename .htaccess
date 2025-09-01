@@ -1,7 +1,6 @@
 RewriteEngine On
 RewriteBase /fatura_takip_api/
 
-# Eğer istenen dosya veya klasör yoksa tüm istekleri index.php'ye yönlendir
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
