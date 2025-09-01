@@ -23,7 +23,7 @@ try {
     // GET /faturalar/listele
     switch ($method) {
         case 'GET':
-            switch ($segments[0]) { // eğer yoksa null döner
+            switch ($segments[0]) {
                 case 'faturalar':
                     switch ($segments[1]) {
                         case 'listele':
