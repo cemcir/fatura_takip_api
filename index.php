@@ -93,17 +93,19 @@ try {
                             if(!isset($fatura['faturaId']) && empty($fatura['faturaId'])) {
                                 $sonuc = ['status' => 400, 'msg' => 'FaturaId Zorunludur'];
                             }
-                            try {
-                                if(Database::getInstance()->selectOne('faturalar',['id' => $fatura['faturaId']])) {
-                                    Database::getInstance()->delete('faturalar',['id'=>$fatura['faturaId']]);
-                                    $sonuc = ['status' => 400,'msg' =>'Fatura Kaydı Başarıyla Silindi'];
+                            else {
+                                try {
+                                    if (Database::getInstance()->selectOne('faturalar', ['id' => $fatura['faturaId']])) {
+                                        Database::getInstance()->delete('faturalar', ['id' => $fatura['faturaId']]);
+                                        $sonuc = ['status' => 400, 'msg' => 'Fatura Kaydı Başarıyla Silindi'];
+                                    }
+                                    else {
+                                        $sonuc = ['status' => 404, 'msg' => 'Fatura Kaydı Bulunamadı'];
+                                    }
                                 }
-                                else {
-                                    $sonuc = ['status' => 404, 'msg' => 'Fatura Kaydı Bulunamadı'];
+                                catch (\Exception $e) {
+                                    $sonuc = ['status'=>400,'msg'=>'Fatura Silinirken Hata Oluştu'];
                                 }
-                            }
-                            catch (\Exception $e) {
-                                $sonuc = ['status'=>400,'msg'=>'Fatura Silinirken Hata Oluştu'];
                             }
                             break;
                     }
